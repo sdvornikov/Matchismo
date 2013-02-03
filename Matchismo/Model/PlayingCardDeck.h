@@ -1,5 +1,5 @@
 //
-//  CardGameViewController.h
+//  PlayingCardDeck.h
 //  Matchismo
 //
 //  Created by Sergey on 2013-02-03.
@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PlayingCardDeck.h"
+#import "Deck.h"
 
-@interface CardGameViewController : UIViewController
+@interface PlayingCardDeck : Deck
 
 @end
