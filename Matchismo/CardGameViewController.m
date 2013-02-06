@@ -21,6 +21,14 @@
 
 @implementation CardGameViewController
 
+- (IBAction)dialNewCards:(UIButton *)sender {
+    self.game = nil;
+    self.flipCount = 0;
+    self.lastFlipOutcomeLabel.text = @"";
+    [self updateUI];
+}
+
+
 - (CardMatchingGame *)game {
     if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[[PlayingCardDeck alloc] init]];
     return _game;
