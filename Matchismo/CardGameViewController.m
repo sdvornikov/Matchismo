@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (strong,nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 
 @end
 
@@ -41,6 +42,15 @@
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    
+    
+    if (self.game.lastFlipOutcome == FLIP) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Flipped up %@. Costs %d point",[[self.game.lastFlippedCards lastObject] description], abs(self.game.lastScoreChange)];
+    } else if (self.game.lastFlipOutcome == MATCH) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points",[self.game.lastFlippedCards componentsJoinedByString:@" & "], self.game.lastScoreChange];
+    } else if (self.game.lastFlipOutcome == MISMATCH) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"%@ don’t match! %d points!",[self.game.lastFlippedCards componentsJoinedByString:@" & "], self.game.lastScoreChange];
+    }
 }
 
 - (void)setFlipCount:(int)flipCount {

@@ -17,5 +17,11 @@
 - (Card *)cardAtIndex:(NSInteger)index;
 
 @property (readonly,nonatomic) int score;
+#define FLIP        1
+#define MATCH       2
+#define MISMATCH    3
+@property (readonly,nonatomic) int lastFlipOutcome;
+@property (readonly,nonatomic) int lastScoreChange;
+@property (readonly,nonatomic) NSArray *lastFlippedCards; // of Cards
 
 @end
