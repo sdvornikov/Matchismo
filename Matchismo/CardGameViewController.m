@@ -23,34 +23,6 @@
 
 @implementation CardGameViewController
 
-- (IBAction)gameModeChanged:(UISegmentedControl *)sender {
-    // do something to change game mode
-}
-
-- (IBAction)dialNewCards:(UIButton *)sender {
-    self.gameInProgress = NO;
-    self.game = nil;
-    self.flipCount = 0;
-    self.lastFlipOutcomeLabel.text = @"";
-    [self updateUI];
-}
-
-- (void)setGameInProgress:(BOOL)gameInProgress {
-    _gameInProgress = gameInProgress;
-    self.gameModeSwitch.enabled = !self.gameInProgress;
-}
-
-- (CardMatchingGame *)game {
-    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[[PlayingCardDeck alloc] init]];
-    return _game;
-}
-
-- (void)setCardButtons:(NSArray *)cardButtons {
-    _cardButtons = cardButtons;
-    [self updateUI];
-    
-}
-
 - (void)updateUI {
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
@@ -72,9 +44,41 @@
     }
 }
 
+#pragma mark Setters & Getters
+
 - (void)setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
+}
+
+- (void)setGameInProgress:(BOOL)gameInProgress {
+    _gameInProgress = gameInProgress;
+    self.gameModeSwitch.enabled = !self.gameInProgress;
+}
+
+- (CardMatchingGame *)game {
+    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[[PlayingCardDeck alloc] init]];
+    return _game;
+}
+
+- (void)setCardButtons:(NSArray *)cardButtons {
+    _cardButtons = cardButtons;
+    [self updateUI];
+    
+}
+
+#pragma mark IBActions
+
+- (IBAction)gameModeChanged:(UISegmentedControl *)sender {
+    // do something to change game mode
+}
+
+- (IBAction)dialNewCards:(UIButton *)sender {
+    self.gameInProgress = NO;
+    self.game = nil;
+    self.flipCount = 0;
+    self.lastFlipOutcomeLabel.text = @"";
+    [self updateUI];
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
@@ -83,7 +87,5 @@
     [self updateUI];
     self.flipCount++;
 }
-
-
 
 @end
