@@ -16,18 +16,29 @@
 @property (strong,nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSwitch;
+@property (nonatomic) BOOL gameInProgress;
 
 @end
 
 @implementation CardGameViewController
 
+- (IBAction)gameModeChanged:(UISegmentedControl *)sender {
+    // do something to change game mode
+}
+
 - (IBAction)dialNewCards:(UIButton *)sender {
+    self.gameInProgress = NO;
     self.game = nil;
     self.flipCount = 0;
     self.lastFlipOutcomeLabel.text = @"";
     [self updateUI];
 }
 
+- (void)setGameInProgress:(BOOL)gameInProgress {
+    _gameInProgress = gameInProgress;
+    self.gameModeSwitch.enabled = !self.gameInProgress;
+}
 
 - (CardMatchingGame *)game {
     if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[[PlayingCardDeck alloc] init]];
@@ -67,6 +78,7 @@
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
+    if (!self.gameInProgress) self.gameInProgress = YES;
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     [self updateUI];
     self.flipCount++;
