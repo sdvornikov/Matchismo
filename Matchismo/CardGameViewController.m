@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSwitch;
 @property (nonatomic) BOOL gameInProgress;
+@property (nonatomic) int gameMode;
 
 @end
 
@@ -57,7 +58,9 @@
 }
 
 - (CardMatchingGame *)game {
-    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count] usingDeck:[[PlayingCardDeck alloc] init]];
+    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                          gameMode:self.gameMode
+                                                         usingDeck:[[PlayingCardDeck alloc] init]];
     return _game;
 }
 
@@ -70,7 +73,12 @@
 #pragma mark IBActions
 
 - (IBAction)gameModeChanged:(UISegmentedControl *)sender {
-    // do something to change game mode
+    if (sender.selectedSegmentIndex == 0) {
+        self.gameMode = TWO_CARDS_MATCHING_GAME;
+    } else if (sender.selectedSegmentIndex == 1) {
+        self.gameMode = THREE_CARDS_MATCHING_GAME;
+    }
+    self.game.gameMode = self.gameMode;
 }
 
 - (IBAction)dialNewCards:(UIButton *)sender {

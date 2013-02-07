@@ -12,9 +12,14 @@
 @interface CardMatchingGame : NSObject
 
 - (id)initWithCardCount:(NSInteger)count
+               gameMode:(int) gameMode
               usingDeck:(Deck *)desk;
 - (void)flipCardAtIndex:(NSInteger)index;
 - (Card *)cardAtIndex:(NSInteger)index;
+
+#define TWO_CARDS_MATCHING_GAME 2
+#define THREE_CARDS_MATCHING_GAME 3
+@property (nonatomic) int gameMode;
 
 @property (readonly,nonatomic) int score;
 #define FLIP        1

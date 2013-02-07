@@ -24,7 +24,14 @@
     return _cards;
 }
 
-- (id)initWithCardCount:(NSInteger)count usingDeck:(Deck *)desk {
+- (int)gameMode {
+    if (_gameMode != TWO_CARDS_MATCHING_GAME && _gameMode != THREE_CARDS_MATCHING_GAME) {
+        _gameMode = TWO_CARDS_MATCHING_GAME;
+    }
+    return _gameMode;
+}
+
+- (id)initWithCardCount:(NSInteger)count gameMode:(int) gameMode usingDeck:(Deck *)desk {
     
     self = [super init];
     if (self) {
@@ -36,6 +43,7 @@
                 self = nil;
             }
         }
+        self.gameMode = gameMode;
     }
     return self;
 }
@@ -44,7 +52,7 @@
     return (index < [self.cards count]) ? self.cards[index] : nil;
 }
 
-#define MATCH_BONUS 4
+#define MATCH_BONUS 2
 #define MISMATCH_PENALTY 2
 #define FLIP_COST 1
 
@@ -58,21 +66,19 @@
         if (!card.isFaceUp) {
             self.lastFlipOutcome = FLIP;
             [cardsInvolved addObject:card];
-            for (Card *otherCard in self.cards) {
-                if (otherCard.isFaceUp && !otherCard.isUnplayable) {
-                    int matchScore = [otherCard match:@[card]];
-                    [cardsInvolved addObject:otherCard];
-                    if (matchScore) {
-                        card.unplayeble = YES;
-                        otherCard.unplayeble = YES;
-                        self.lastScoreChange += matchScore * MATCH_BONUS;
-                        self.lastFlipOutcome = MATCH;
-                    } else {
-                        otherCard.faceUp = NO;
-                        self.lastScoreChange -= MISMATCH_PENALTY;
-                        self.lastFlipOutcome = MISMATCH;
-                    }
-                    break;
+            if ((self.gameMode == TWO_CARDS_MATCHING_GAME && [[self flippedUpCards] count] == 1) ||
+                (self.gameMode == THREE_CARDS_MATCHING_GAME && [[self flippedUpCards] count] == 2)) {
+                int matchScore = [card match:[self flippedUpCards]];
+                [cardsInvolved addObjectsFromArray:[self flippedUpCards]];
+                if (matchScore) {
+                    card.unplayeble = YES;
+                    [self setUnplayeble:YES faceUp:YES ForCards:[self flippedUpCards]];
+                    self.lastScoreChange += matchScore * MATCH_BONUS;
+                    self.lastFlipOutcome = MATCH;
+                } else {
+                    [self setUnplayeble:NO faceUp:NO ForCards:[self flippedUpCards]];
+                    self.lastScoreChange -= MISMATCH_PENALTY;
+                    self.lastFlipOutcome = MISMATCH;
                 }
             }
             self.lastScoreChange -= FLIP_COST;
@@ -83,5 +89,21 @@
     self.lastFlippedCards = [cardsInvolved copy];
 }
 
+- (NSArray *)flippedUpCards {
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    for (Card *card in self.cards) {
+        if (card.isFaceUp && !card.isUnplayable) {
+            [result addObject:card];
+        }
+    }
+        return [result copy];
+}
+
+- (void)setUnplayeble:(BOOL) unplayeble faceUp:(BOOL) faceUp ForCards:(NSArray *)cards {
+    for (Card *card in cards) {
+        card.unplayeble = unplayeble;
+        card.faceUp = faceUp;
+    }
+}
 
 @end
