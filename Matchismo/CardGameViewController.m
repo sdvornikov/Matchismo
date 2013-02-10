@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSwitch;
 @property (nonatomic) BOOL gameInProgress;
 @property (nonatomic) int gameMode;
+@property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
+@property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
 
 @end
 
@@ -44,15 +46,29 @@
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-    
-    
-    if (self.game.lastFlipOutcome == FLIP) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Flipped up %@. Costs %d point",[[self.game.lastFlippedCards lastObject] description], abs(self.game.lastScoreChange)];
-    } else if (self.game.lastFlipOutcome == MATCH) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points",[self.game.lastFlippedCards componentsJoinedByString:@" & "], self.game.lastScoreChange];
-    } else if (self.game.lastFlipOutcome == MISMATCH) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"%@ don’t match! %d points!",[self.game.lastFlippedCards componentsJoinedByString:@" & "], self.game.lastScoreChange];
+}
+
+- (void)displayLastFlipInfoForCards:(NSArray*)cards forOutcome:(int) outcome points:(int) points {
+    if (outcome == FLIP) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Flipped up %@. Costs %d point",[[cards lastObject] description], abs(points)];
+    } else if (outcome == MATCH) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points",[cards componentsJoinedByString:@" & "], points];
+    } else if (outcome == MISMATCH) {
+        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"%@ don’t match! %d points!",[cards componentsJoinedByString:@" & "], points];
     }
+    
+    self.lastFlipOutcomeLabel.alpha = 1;
+    [self.gameHistory addObject:self.lastFlipOutcomeLabel.text];
+    if ([self.gameHistory count] == 0) {
+        self.gameHistorySlider.enabled = NO;
+    } else {
+        self.gameHistorySlider.enabled = YES;
+        //  -0.5 for setting minimum range of 0..0.5 when there's only one history record
+        // it makes the slider set always at the most right position.
+        self.gameHistorySlider.maximumValue = [self.gameHistory count]-0.5;
+        self.gameHistorySlider.value = [self.gameHistory count]-0.5;
+    }
+    
 }
 
 #pragma mark Setters & Getters
@@ -80,6 +96,13 @@
     
 }
 
+- (NSMutableArray *)gameHistory {
+    if (!_gameHistory) {
+        _gameHistory = [[NSMutableArray alloc] init];
+    }
+    return _gameHistory;
+}
+
 #pragma mark IBActions
 
 - (IBAction)gameModeChanged:(UISegmentedControl *)sender {
@@ -96,6 +119,8 @@
     self.game = nil;
     self.flipCount = 0;
     self.lastFlipOutcomeLabel.text = @"";
+    self.gameHistory = nil;
+    self.gameHistorySlider.enabled = NO;
     [self updateUI];
 }
 
@@ -104,6 +129,13 @@
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     [self updateUI];
     self.flipCount++;
+    [self displayLastFlipInfoForCards:self.game.lastFlippedCards forOutcome:self.game.lastFlipOutcome points:self.game.lastScoreChange];
+}
+- (IBAction)showGameHistory:(UISlider *)sender {
+    self.lastFlipOutcomeLabel.alpha = 0.5;
+    self.lastFlipOutcomeLabel.text = self.gameHistory[(int) sender.value];
+
+    
 }
 
 @end
