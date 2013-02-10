@@ -9,7 +9,7 @@ Matchismo is a simple cards mathing game.
 
 
 
-
+----
 
 Copyright info:
 - the back of a card image was based on work from Flickr "1941 Blondie Comic Playing Card" by Mark Anderson (CC BY 2.0)
