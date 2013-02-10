@@ -6,3 +6,11 @@ https://itunes.apple.com/us/course/coding-together-developing/id593208016
 
 This is a public repository for the course assignments.
 Matchismo is a simple cards mathing game.
+
+
+
+
+
+Copyright info:
+- the back of a card image was based on work from Flickr "1941 Blondie Comic Playing Card" by Mark Anderson (CC BY 2.0)
+  http://www.flickr.com/photos/andertoons-cartoons/2517004394/
