@@ -30,8 +30,8 @@
     
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
+        [cardButton setTitle:card.contents forState:UIControlStateNormal];
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected|UIControlStateDisabled];
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
@@ -89,6 +89,7 @@
         [button setImage:cardBackImage forState:UIControlStateNormal];
         [button setImage:blankImage forState:UIControlStateSelected];
         [button setImage:blankImage forState:UIControlStateDisabled|UIControlStateSelected];
+        [button setImage:blankImage forState:UIControlStateHighlighted|UIControlStateSelected];
         button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
     }
     [self updateUI];
@@ -129,12 +130,14 @@
     [self updateUI];
     self.flipCount++;
     [self displayLastFlipInfoForCards:self.game.lastFlippedCards forOutcome:self.game.lastFlipOutcome points:self.game.lastScoreChange];
+    [UIView beginAnimations:@"flipCard" context:nil];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:sender cache:YES];
+    [UIView setAnimationDuration:0.4];
+    [UIView commitAnimations];
 }
 - (IBAction)showGameHistory:(UISlider *)sender {
     self.lastFlipOutcomeLabel.alpha = 0.5;
     self.lastFlipOutcomeLabel.text = self.gameHistory[(int) sender.value];
-
-    
 }
 
 @end
