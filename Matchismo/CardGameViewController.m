@@ -32,11 +32,21 @@
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         [cardButton setTitle:card.contents forState:UIControlStateNormal];
         [cardButton setTitle:card.contents forState:UIControlStateSelected];
+        if (cardButton.isSelected && !card.isFaceUp) {
+            [self flipCardButtonAnimated:cardButton];
+        }
         cardButton.selected = card.isFaceUp;
         cardButton.enabled = !card.isUnplayable;
         cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
     }
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+}
+
+- (void) flipCardButtonAnimated:(UIButton*)button {
+    [UIView beginAnimations:@"flipCard" context:nil];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:button cache:YES];
+    [UIView setAnimationDuration:0.4];
+    [UIView commitAnimations];
 }
 
 - (void)displayLastFlipInfoForCards:(NSArray*)cards forOutcome:(int) outcome points:(int) points {
@@ -130,10 +140,7 @@
     [self updateUI];
     self.flipCount++;
     [self displayLastFlipInfoForCards:self.game.lastFlippedCards forOutcome:self.game.lastFlipOutcome points:self.game.lastScoreChange];
-    [UIView beginAnimations:@"flipCard" context:nil];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:sender cache:YES];
-    [UIView setAnimationDuration:0.4];
-    [UIView commitAnimations];
+    [self flipCardButtonAnimated:sender];
 }
 - (IBAction)showGameHistory:(UISlider *)sender {
     self.lastFlipOutcomeLabel.alpha = 0.5;
