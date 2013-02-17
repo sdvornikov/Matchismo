@@ -15,8 +15,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 
 // Have to override this. Must return valid CardMatchingGame object. Default is nil.
-- (CardMatchingGame*)createNewGame;
+//- (CardMatchingGame*)createNewGame;
 
 // Override this to implement how game state must be shown.
-- (void)updateUI;
+//- (void)updateUI;
 @end
