@@ -314,7 +314,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="2 Cards Match" image="testIcon.png" id="ykX-e2-6yw"/>
+                    <tabBarItem key="tabBarItem" title="2 Cards Match" image="matchIcon.png" id="ykX-e2-6yw"/>
                     <connections>
                         <outlet property="flipsLabel" destination="3LD-7K-NKl" id="F04-nz-afp"/>
                         <outlet property="gameHistorySlider" destination="glk-S9-2YR" id="tof-Vr-OW9"/>
@@ -780,7 +780,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Set" id="vT6-hu-lNj"/>
+                    <tabBarItem key="tabBarItem" title="Set" image="setIcon.png" id="vT6-hu-lNj"/>
                     <connections>
                         <outlet property="flipsLabel" destination="bD1-AU-DJ2" id="K7F-zV-O57"/>
                         <outlet property="gameHistorySlider" destination="rlT-1M-rio" id="FSK-SK-Kfh"/>
@@ -837,7 +837,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="testIcon.png" width="30" height="30"/>
+        <image name="matchIcon.png" width="30" height="30"/>
+        <image name="setIcon.png" width="30" height="30"/>
     </resources>
     <classes>
         <class className="CardGameViewController" superclassName="UIViewController">
