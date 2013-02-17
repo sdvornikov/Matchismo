@@ -7,17 +7,13 @@
 //
 
 #import "CardGameViewController.h"
-#import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (strong,nonatomic) CardMatchingGame *game;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 @property (nonatomic) BOOL gameInProgress;
-@property (nonatomic) int gameMode; // 2(default) or 3 only
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
 
@@ -26,26 +22,11 @@
 @implementation CardGameViewController
 
 - (void)updateUI {
-    
-    for (UIButton *cardButton in self.cardButtons) {
-        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        [cardButton setTitle:card.contents forState:UIControlStateNormal];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        if (cardButton.isSelected && !card.isFaceUp) {
-            [self flipCardButtonAnimated:cardButton];
-        }
-        cardButton.selected = card.isFaceUp;
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
-    }
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    // must be overriden by subclasses 
 }
 
-- (void) flipCardButtonAnimated:(UIButton*)button {
-    [UIView beginAnimations:@"flipCard" context:nil];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:button cache:YES];
-    [UIView setAnimationDuration:0.4];
-    [UIView commitAnimations];
+- (void) updateScoreLable {
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
 - (void)displayLastFlipInfoForCards:(NSArray*)cards forOutcome:(int) outcome points:(int) points {
@@ -71,13 +52,15 @@
     
 }
 
+- (CardMatchingGame*)createNewGame {
+    return nil;
+}
+
 #pragma mark Setters & Getters
 
--(int)gameMode {
-    if (_gameMode != TWO_CARDS_MATCHING_GAME && _gameMode !=THREE_CARDS_MATCHING_GAME) {
-        _gameMode = TWO_CARDS_MATCHING_GAME;
-    }
-    return _gameMode;
+- (CardMatchingGame *)game {
+    if(!_game) _game = [self createNewGame];
+    return _game;
 }
 
 - (void)setFlipCount:(int)flipCount {
@@ -87,13 +70,6 @@
 
 - (void)setGameInProgress:(BOOL)gameInProgress {
     _gameInProgress = gameInProgress;
-}
-
-- (CardMatchingGame *)game {
-    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          gameMode:self.gameMode
-                                                         usingDeck:[[PlayingCardDeck alloc] init]];
-    return _game;
 }
 
 - (void)setCardButtons:(NSArray *)cardButtons {
@@ -127,16 +103,17 @@
     self.lastFlipOutcomeLabel.text = @"";
     self.gameHistory = nil;
     self.gameHistorySlider.enabled = NO;
+    [self updateScoreLable];
     [self updateUI];
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
     if (!self.gameInProgress) self.gameInProgress = YES;
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    [self updateScoreLable];
     [self updateUI];
     self.flipCount++;
     [self displayLastFlipInfoForCards:self.game.lastFlippedCards forOutcome:self.game.lastFlipOutcome points:self.game.lastScoreChange];
-    [self flipCardButtonAnimated:sender];
 }
 - (IBAction)showGameHistory:(UISlider *)sender {
     self.lastFlipOutcomeLabel.alpha = 0.5;
