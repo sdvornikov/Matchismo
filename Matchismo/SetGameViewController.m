@@ -7,6 +7,7 @@
 //
 
 #import "SetGameViewController.h"
+#import "SetDeck.h"
 
 @interface SetGameViewController ()
 
@@ -15,9 +16,9 @@
 @implementation SetGameViewController
 
 - (CardMatchingGame *)createNewGame {
-    return nil; //[[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                  //                            gameMode:TWO_CARDS_MATCHING_GAME
-                  //                           usingDeck:[[PlayingCardDeck alloc] init]];
+    return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                              gameMode:THREE_CARDS_MATCHING_GAME
+                                             usingDeck:[[SetDeck alloc] init]];
 }
 
 @end
