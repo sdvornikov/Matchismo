@@ -13,7 +13,6 @@
 @property (nonatomic) int flipCount;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
-@property (nonatomic) BOOL gameInProgress;
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
 
@@ -68,10 +67,6 @@
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
 }
 
-- (void)setGameInProgress:(BOOL)gameInProgress {
-    _gameInProgress = gameInProgress;
-}
-
 - (void)setCardButtons:(NSArray *)cardButtons {
     _cardButtons = cardButtons;
     UIImage *cardBackImage = [UIImage imageNamed:@"cardback.png"];
@@ -97,7 +92,6 @@
 #pragma mark IBActions
 
 - (IBAction)dialNewCards:(UIButton *)sender {
-    self.gameInProgress = NO;
     self.game = nil;
     self.flipCount = 0;
     self.lastFlipOutcomeLabel.text = @"";
@@ -108,7 +102,6 @@
 }
 
 - (IBAction)flipCard:(UIButton *)sender {
-    if (!self.gameInProgress) self.gameInProgress = YES;
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     [self updateScoreLable];
     [self updateUI];
