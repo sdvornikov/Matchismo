@@ -53,13 +53,43 @@
     self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
 }
 
+- (NSAttributedString*) constructLastFlipInfoAttributedStringWithBegining:(NSString*) beg
+                                                                    cards:(NSArray*) cards
+                                                                   middle:(NSString*)mid
+                                                                   points:(int) points
+                                                                   ending:(NSString*) end {
+    NSMutableAttributedString *result;
+    result = [[NSMutableAttributedString alloc] initWithString:beg];
+    for (Card *card in cards) {
+        [result appendAttributedString:[self labelOfCard:card]];
+        [result appendAttributedString:[[NSAttributedString alloc] initWithString:@"&"]];
+    }
+    [result deleteCharactersInRange:NSMakeRange([result length] - 1, 1)];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:mid]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:[@(points) stringValue]]];
+    [result appendAttributedString:[[NSAttributedString alloc] initWithString:end]];
+    return [result copy];
+}
+
 - (void)displayLastFlipInfoForCards:(NSArray*)cards forOutcome:(int) outcome points:(int) points {
     if (outcome == FLIP) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Flipped up %@. Costs %d point",[[cards lastObject] description], abs(points)];
+        self.lastFlipOutcomeLabel.attributedText = [self constructLastFlipInfoAttributedStringWithBegining:@"Flipped up "
+                                                                                                     cards:cards
+                                                                                                    middle:@". Costs "
+                                                                                                    points:abs(points)
+                                                                                                    ending:@" point"];
     } else if (outcome == MATCH) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"Matched %@ for %d points",[cards componentsJoinedByString:@" & "], points];
+        self.lastFlipOutcomeLabel.attributedText = [self constructLastFlipInfoAttributedStringWithBegining:@"Matched "
+                                                                                                     cards:cards
+                                                                                                    middle:@" for "
+                                                                                                    points:points
+                                                                                                    ending:@" points"];
     } else if (outcome == MISMATCH) {
-        self.lastFlipOutcomeLabel.text = [NSString stringWithFormat:@"%@ don’t match! %d points!",[cards componentsJoinedByString:@" & "], points];
+        self.lastFlipOutcomeLabel.attributedText = [self constructLastFlipInfoAttributedStringWithBegining:@""
+                                                                                                     cards:cards
+                                                                                                    middle:@" don’t match! "
+                                                                                                    points:points
+                                                                                                    ending:@" points!"];
     }
     
     self.lastFlipOutcomeLabel.alpha = 1;
