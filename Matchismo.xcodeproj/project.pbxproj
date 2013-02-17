@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A51A7C7016D135E100B5DD7D /* testIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A51A7C6F16D135E100B5DD7D /* testIcon.png */; };
 		A557C91C16C78E75001BC215 /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = A557C91B16C78E75001BC215 /* cardback.png */; };
 		A557C91F16C825CC001BC215 /* SetCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A557C91E16C825CC001BC215 /* SetCard.m */; };
 		A557C92216C825FE001BC215 /* SetDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = A557C92116C825FE001BC215 /* SetDeck.m */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A51A7C6F16D135E100B5DD7D /* testIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testIcon.png; sourceTree = "<group>"; };
 		A557C91B16C78E75001BC215 /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
 		A557C91D16C825CC001BC215 /* SetCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCard.h; path = Model/SetCard.h; sourceTree = "<group>"; };
 		A557C91E16C825CC001BC215 /* SetCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCard.m; path = Model/SetCard.m; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		A5E017D516BEA4E800E48B9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A51A7C6F16D135E100B5DD7D /* testIcon.png */,
 				A557C91B16C78E75001BC215 /* cardback.png */,
 				A5E017DD16BEA4E800E48B9E /* CardGameAppDelegate.h */,
 				A5E017DE16BEA4E800E48B9E /* CardGameAppDelegate.m */,
@@ -221,6 +224,7 @@
 				A5E017E516BEA4E800E48B9E /* Default-568h@2x.png in Resources */,
 				A5E017E816BEA4E800E48B9E /* MainStoryboard.storyboard in Resources */,
 				A557C91C16C78E75001BC215 /* cardback.png in Resources */,
+				A51A7C7016D135E100B5DD7D /* testIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
