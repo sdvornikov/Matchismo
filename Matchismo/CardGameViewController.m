@@ -21,7 +21,24 @@
 @implementation CardGameViewController
 
 - (void)updateUI {
-    // must be overriden by subclasses 
+    for (UIButton *cardButton in self.cardButtons) {
+        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
+        [cardButton setAttributedTitle:[self labelOfCard:card] forState:UIControlStateNormal];
+        [cardButton setAttributedTitle:[self labelOfCard:card] forState:UIControlStateSelected];
+        if ((cardButton.isSelected && !card.isFaceUp) || (!cardButton.isSelected && card.isFaceUp)) {
+            //[self flipCardButtonAnimated:cardButton];
+        }
+        cardButton.selected = card.isFaceUp;
+        cardButton.enabled = !card.isUnplayable;
+        cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
+    }
+}
+
+- (NSAttributedString*) labelOfCard:(Card*) card {
+    NSString* string = [NSString stringWithString:card.contents];
+    NSMutableAttributedString *resultAtrString = [[NSMutableAttributedString alloc] initWithString:string];
+    
+    return [resultAtrString copy];
 }
 
 - (void) updateScoreLable {
@@ -69,17 +86,22 @@
 
 - (void)setCardButtons:(NSArray *)cardButtons {
     _cardButtons = cardButtons;
-    UIImage *cardBackImage = [UIImage imageNamed:@"cardback.png"];
-    UIImage *blankImage = [[UIImage alloc] init];
-    for (UIButton *button in cardButtons) {
-        [button setImage:cardBackImage forState:UIControlStateNormal];
-        [button setImage:blankImage forState:UIControlStateSelected];
-        [button setImage:blankImage forState:UIControlStateDisabled|UIControlStateSelected];
-        [button setImage:blankImage forState:UIControlStateHighlighted|UIControlStateSelected];
-        button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+    UIImage *cardBackImage = [self cardBackImage];
+    if (cardBackImage) {
+        UIImage *blankImage = [[UIImage alloc] init];
+        for (UIButton *button in cardButtons) {
+            [button setImage:cardBackImage forState:UIControlStateNormal];
+            [button setImage:blankImage forState:UIControlStateSelected];
+            [button setImage:blankImage forState:UIControlStateDisabled|UIControlStateSelected];
+            [button setImage:blankImage forState:UIControlStateHighlighted|UIControlStateSelected];
+            button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
+        }
     }
     [self updateUI];
-    
+}
+
+- (UIImage*)cardBackImage {
+    return nil;
 }
 
 - (NSMutableArray *)gameHistory {

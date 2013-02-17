@@ -7,7 +7,7 @@
 //
 
 #import "SetDeck.h"
-#import "SetCard.h"
+
 
 @implementation SetDeck
 - (id)init {

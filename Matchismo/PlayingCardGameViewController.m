@@ -43,5 +43,8 @@
                                                          usingDeck:[[PlayingCardDeck alloc] init]];
 }
 
+- (UIImage*)cardBackImage {
+    return [UIImage imageNamed:@"cardback.png"];
+}
 
 @end
