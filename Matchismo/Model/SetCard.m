@@ -28,10 +28,25 @@
 }
 
 - (int)match:(NSArray *)otherCards {
-    int score = 0;
+    NSMutableArray *cardToMatch = [otherCards mutableCopy];
+    [cardToMatch addObject:self];
+    BOOL setFound = YES;
     
+    for (int i = 0; i < [cardToMatch count]; i++) {
+        SetCard *card = [cardToMatch objectAtIndex:i];
+        for (int j = i + 1; j < [cardToMatch count]; j++) {
+            SetCard *otherCard = [cardToMatch objectAtIndex:j];
+            if (card.number == otherCard.number ||
+                card.symbol == otherCard.symbol ||
+                card.shading == otherCard.shading ||
+                card.color == otherCard.color) {
+                setFound = NO;
+                break;
+            }
+        }
+    }
     
-    return score;
+    return setFound ? 15 : 0;
 }
 
 @end
