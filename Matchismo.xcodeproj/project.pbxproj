@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A51A7C7016D135E100B5DD7D /* matchIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A51A7C6F16D135E100B5DD7D /* matchIcon.png */; };
 		A51A7C7216D1460A00B5DD7D /* setIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A51A7C7116D1460A00B5DD7D /* setIcon.png */; };
+		A51A7C7416D148D400B5DD7D /* scoresIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = A51A7C7316D148D400B5DD7D /* scoresIcon.png */; };
 		A557C91C16C78E75001BC215 /* cardback.png in Resources */ = {isa = PBXBuildFile; fileRef = A557C91B16C78E75001BC215 /* cardback.png */; };
 		A557C91F16C825CC001BC215 /* SetCard.m in Sources */ = {isa = PBXBuildFile; fileRef = A557C91E16C825CC001BC215 /* SetCard.m */; };
 		A557C92216C825FE001BC215 /* SetDeck.m in Sources */ = {isa = PBXBuildFile; fileRef = A557C92116C825FE001BC215 /* SetDeck.m */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		A51A7C6F16D135E100B5DD7D /* matchIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = matchIcon.png; sourceTree = "<group>"; };
 		A51A7C7116D1460A00B5DD7D /* setIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setIcon.png; sourceTree = "<group>"; };
+		A51A7C7316D148D400B5DD7D /* scoresIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scoresIcon.png; sourceTree = "<group>"; };
 		A557C91B16C78E75001BC215 /* cardback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cardback.png; sourceTree = "<group>"; };
 		A557C91D16C825CC001BC215 /* SetCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetCard.h; path = Model/SetCard.h; sourceTree = "<group>"; };
 		A557C91E16C825CC001BC215 /* SetCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetCard.m; path = Model/SetCard.m; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		A5E017D516BEA4E800E48B9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A51A7C7316D148D400B5DD7D /* scoresIcon.png */,
 				A51A7C7116D1460A00B5DD7D /* setIcon.png */,
 				A51A7C6F16D135E100B5DD7D /* matchIcon.png */,
 				A557C91B16C78E75001BC215 /* cardback.png */,
@@ -229,6 +232,7 @@
 				A557C91C16C78E75001BC215 /* cardback.png in Resources */,
 				A51A7C7016D135E100B5DD7D /* matchIcon.png in Resources */,
 				A51A7C7216D1460A00B5DD7D /* setIcon.png in Resources */,
+				A51A7C7416D148D400B5DD7D /* scoresIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
