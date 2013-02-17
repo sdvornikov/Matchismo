@@ -15,6 +15,21 @@
 
 @implementation SetGameViewController
 
+- (void)updateCardButton:(UIButton*)cardButton forFaceUpStatus:(BOOL) isFaceUp {
+    if (isFaceUp) {
+        cardButton.backgroundColor = [UIColor lightGrayColor];
+    } else {
+        cardButton.backgroundColor = nil;
+    }
+    
+    cardButton.selected = isFaceUp;
+}
+
+- (void)updateCardButton:(UIButton*)cardButton forUnplayableStatus:(BOOL) isUnplayable {
+    cardButton.enabled = !isUnplayable;
+    cardButton.hidden = isUnplayable;
+}
+
 - (CardMatchingGame *)createNewGame {
     return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
                                               gameMode:THREE_CARDS_MATCHING_GAME

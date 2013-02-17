@@ -12,6 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
@@ -21,17 +22,23 @@
 @implementation CardGameViewController
 
 - (void)updateUI {
+    
     for (UIButton *cardButton in self.cardButtons) {
         Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
         [cardButton setAttributedTitle:[self labelOfCard:card] forState:UIControlStateNormal];
         [cardButton setAttributedTitle:[self labelOfCard:card] forState:UIControlStateSelected];
-        if ((cardButton.isSelected && !card.isFaceUp) || (!cardButton.isSelected && card.isFaceUp)) {
-            //[self flipCardButtonAnimated:cardButton];
-        }
-        cardButton.selected = card.isFaceUp;
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
+        [self updateCardButton:cardButton forFaceUpStatus:card.isFaceUp];
+        [self updateCardButton:cardButton forUnplayableStatus:card.isUnplayable];
     }
+}
+
+- (void)updateCardButton:(UIButton*)cardButton forFaceUpStatus:(BOOL) isFaceUp {
+    cardButton.selected = isFaceUp;
+}
+
+- (void)updateCardButton:(UIButton*)cardButton forUnplayableStatus:(BOOL) isUnplayable {
+    cardButton.enabled = !isUnplayable;
+    cardButton.alpha = (isUnplayable ? 0.3 : 1.0);
 }
 
 - (NSAttributedString*) labelOfCard:(Card*) card {

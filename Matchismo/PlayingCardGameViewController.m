@@ -15,19 +15,11 @@
 
 @implementation PlayingCardGameViewController
 
-- (void)updateUI {
-    
-    for (UIButton *cardButton in self.cardButtons) {
-        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        [cardButton setTitle:card.contents forState:UIControlStateNormal];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        if ((cardButton.isSelected && !card.isFaceUp) || (!cardButton.isSelected && card.isFaceUp)) {
-            [self flipCardButtonAnimated:cardButton];
-        }
-        cardButton.selected = card.isFaceUp;
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = (card.isUnplayable ? 0.3 : 1.0);
+- (void)updateCardButton:(UIButton*)cardButton forFaceUpStatus:(BOOL) isFaceUp {
+    if ((cardButton.isSelected && !isFaceUp) || (!cardButton.isSelected && isFaceUp)) {
+        [self flipCardButtonAnimated:cardButton];
     }
+    cardButton.selected = isFaceUp;
 }
 
 - (void) flipCardButtonAnimated:(UIButton*)button {
