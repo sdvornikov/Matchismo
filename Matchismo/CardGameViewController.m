@@ -93,7 +93,7 @@
     }
     
     self.lastFlipOutcomeLabel.alpha = 1;
-    [self.gameHistory addObject:self.lastFlipOutcomeLabel.text];
+    [self.gameHistory addObject:self.lastFlipOutcomeLabel.attributedText];
     if ([self.gameHistory count] == 0) {
         self.gameHistorySlider.enabled = NO;
     } else {
@@ -176,7 +176,7 @@
 }
 - (IBAction)showGameHistory:(UISlider *)sender {
     self.lastFlipOutcomeLabel.alpha = 0.5;
-    self.lastFlipOutcomeLabel.text = self.gameHistory[(int) sender.value];
+    self.lastFlipOutcomeLabel.attributedText = self.gameHistory[(int) sender.value];
 }
 
 @end
