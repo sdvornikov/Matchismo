@@ -304,24 +304,6 @@
                                     <action selector="dialNewCards:" destination="2" eventType="touchUpInside" id="2VU-6K-9nT"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="sdY-V0-tyV">
-                                <rect key="frame" x="223" y="397" width="77" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="2"/>
-                                    <segment title="3"/>
-                                </segments>
-                                <connections>
-                                    <action selector="gameModeChanged:" destination="2" eventType="valueChanged" id="uGh-a0-DRb"/>
-                                </connections>
-                            </segmentedControl>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Game mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="tCS-hZ-YOe">
-                                <rect key="frame" x="214" y="373" width="94" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" id="glk-S9-2YR">
                                 <rect key="frame" x="18" y="418" width="199" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -335,7 +317,6 @@
                     <connections>
                         <outlet property="flipsLabel" destination="3LD-7K-NKl" id="F04-nz-afp"/>
                         <outlet property="gameHistorySlider" destination="glk-S9-2YR" id="tof-Vr-OW9"/>
-                        <outlet property="gameModeSwitch" destination="sdY-V0-tyV" id="h3M-Lg-opw"/>
                         <outlet property="lastFlipOutcomeLabel" destination="Z8F-Xi-Vsl" id="KLB-f1-uWW"/>
                         <outlet property="scoreLabel" destination="qQ7-WQ-itM" id="RCL-zC-xAH"/>
                         <outletCollection property="cardButtons" destination="WnL-O9-ZKn" id="hdt-nz-Mlr"/>
@@ -367,11 +348,9 @@
             <relationships>
                 <relationship kind="action" name="dialNewCards:" candidateClass="UIButton"/>
                 <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
-                <relationship kind="action" name="gameModeChanged:" candidateClass="UISegmentedControl"/>
                 <relationship kind="action" name="showGameHistory:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="gameHistorySlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="gameModeSwitch" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="lastFlipOutcomeLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="scoreLabel" candidateClass="UILabel"/>
                 <relationship kind="outletCollection" name="cardButtons" candidateClass="UIButton"/>

@@ -16,9 +16,8 @@
 @property (strong,nonatomic) CardMatchingGame *game;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSwitch;
 @property (nonatomic) BOOL gameInProgress;
-@property (nonatomic) int gameMode;
+@property (nonatomic) int gameMode; // 2(default) or 3 only
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
 
@@ -74,6 +73,13 @@
 
 #pragma mark Setters & Getters
 
+-(int)gameMode {
+    if (_gameMode != TWO_CARDS_MATCHING_GAME && _gameMode !=THREE_CARDS_MATCHING_GAME) {
+        _gameMode = TWO_CARDS_MATCHING_GAME;
+    }
+    return _gameMode;
+}
+
 - (void)setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
@@ -81,7 +87,6 @@
 
 - (void)setGameInProgress:(BOOL)gameInProgress {
     _gameInProgress = gameInProgress;
-    self.gameModeSwitch.enabled = !self.gameInProgress;
 }
 
 - (CardMatchingGame *)game {
@@ -114,15 +119,6 @@
 }
 
 #pragma mark IBActions
-
-- (IBAction)gameModeChanged:(UISegmentedControl *)sender {
-    if (sender.selectedSegmentIndex == 0) {
-        self.gameMode = TWO_CARDS_MATCHING_GAME;
-    } else if (sender.selectedSegmentIndex == 1) {
-        self.gameMode = THREE_CARDS_MATCHING_GAME;
-    }
-    self.game.gameMode = self.gameMode;
-}
 
 - (IBAction)dialNewCards:(UIButton *)sender {
     self.gameInProgress = NO;
