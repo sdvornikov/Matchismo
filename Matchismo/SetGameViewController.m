@@ -30,10 +30,12 @@
     cardButton.hidden = isUnplayable;
 }
 
-- (CardMatchingGame *)createNewGame {
-    return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                              gameMode:THREE_CARDS_MATCHING_GAME
-                                             usingDeck:[[SetDeck alloc] init]];
+- (Deck*)createNewDeck {
+    return [[SetDeck alloc] init];
+}
+
+- (int)gameMode {
+    return THREE_CARDS_MATCHING_GAME;
 }
 
 - (NSAttributedString*) labelOfCard:(Card*) card {

@@ -11,8 +11,9 @@
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
+@property (strong,nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-//@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
@@ -75,14 +76,20 @@
     
 }
 
-- (CardMatchingGame*)createNewGame {
-    return nil;
+- (Deck*)createNewDeck {
+    return [[Deck alloc] init];
+}
+
+- (int)gameMode {
+    return TWO_CARDS_MATCHING_GAME; // default value
 }
 
 #pragma mark Setters & Getters
 
 - (CardMatchingGame *)game {
-    if(!_game) _game = [self createNewGame];
+    if(!_game) _game = [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
+                                                          gameMode:[self gameMode]
+                                                         usingDeck:[self createNewDeck]];
     return _game;
 }
 

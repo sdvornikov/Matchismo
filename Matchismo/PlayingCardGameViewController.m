@@ -29,10 +29,12 @@
     [UIView commitAnimations];
 }
 
-- (CardMatchingGame *)createNewGame {
-    return [[CardMatchingGame alloc] initWithCardCount:[self.cardButtons count]
-                                                          gameMode:TWO_CARDS_MATCHING_GAME
-                                                         usingDeck:[[PlayingCardDeck alloc] init]];
+- (Deck*)createNewDeck {
+    return [[PlayingCardDeck alloc] init];
+}
+
+- (int)gameMode {
+    return TWO_CARDS_MATCHING_GAME;
 }
 
 - (UIImage*)cardBackImage {
