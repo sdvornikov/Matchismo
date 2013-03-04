@@ -56,9 +56,9 @@
     [roundedRect stroke];
     
     if (self.faceUp) {
-        UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.jpg",[self rankAsString],self.suit]];
+        UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png",[self rankAsString],self.suit]];
         if (faceImage) {
-            CGRect imageRect = CGRectInset(self.bounds, self.bounds.size.width * 0.20, self.bounds.size.height * 0.20);
+            CGRect imageRect = CGRectInset(self.bounds, self.bounds.size.width * 0.19, self.bounds.size.height * 0.13);
             [faceImage drawInRect:imageRect];
         } else {
             [self drawPips];
