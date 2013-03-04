@@ -19,8 +19,8 @@
 - (void)setPlayingCardView:(PlayingCardView *)playingCardView
 {
     _playingCardView = playingCardView;
-    self.playingCardView.suit = @"♥";
-    self.playingCardView.rank = 3;
+    self.playingCardView.suit = @"♠";
+    self.playingCardView.rank = 12;
     self.playingCardView.faceUp = YES;
 }
 
