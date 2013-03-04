@@ -171,5 +171,15 @@
     [self popContext];
 }
 
+- (void)flipCardAnimated
+{
+    [UIView transitionWithView:self
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{
+                        self.faceUp = !self.faceUp;
+                    }
+                    completion:NULL];
+}
 
 @end

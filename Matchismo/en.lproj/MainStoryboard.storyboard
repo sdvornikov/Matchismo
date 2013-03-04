@@ -828,6 +828,10 @@
                                 <rect key="frame" x="77" y="86" width="166" height="239"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="JN6-Aw-nZv" appends="YES" id="PGJ-4h-tnG"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.22393560770000001" green="0.50764266300000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -838,6 +842,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJK-EC-LVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="JN6-Aw-nZv">
+                    <connections>
+                        <action selector="tap:" destination="FpQ-Yp-uU1" id="18r-3R-3u5"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1683" y="915"/>
         </scene>
@@ -871,6 +880,9 @@
         <class className="CardGameViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CardGameViewController.h"/>
             <relationships>
+                <relationship kind="action" name="dialNewCards:" candidateClass="UIButton"/>
+                <relationship kind="action" name="flipCard:" candidateClass="UIButton"/>
+                <relationship kind="action" name="showGameHistory:" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="flipsLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="gameHistorySlider" candidateClass="UISlider"/>
                 <relationship kind="outlet" name="lastFlipOutcomeLabel" candidateClass="UILabel"/>

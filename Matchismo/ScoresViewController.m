@@ -23,5 +23,8 @@
     self.playingCardView.rank = 12;
     self.playingCardView.faceUp = YES;
 }
+- (IBAction)tap:(UITapGestureRecognizer *)sender {
+    [self.playingCardView flipCardAnimated];
+}
 
 @end

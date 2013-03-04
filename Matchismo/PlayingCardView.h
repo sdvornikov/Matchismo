@@ -14,4 +14,6 @@
 @property (nonatomic,strong) NSString *suit;
 @property (nonatomic) BOOL faceUp;
 
+- (void)flipCardAnimated;
+
 @end
