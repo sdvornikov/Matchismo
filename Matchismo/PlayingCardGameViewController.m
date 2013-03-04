@@ -8,6 +8,8 @@
 
 #import "PlayingCardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "PlayingCardCollectionViewCell.h"
+#import "PlayingCard.h"
 
 @interface PlayingCardGameViewController ()
 
@@ -37,8 +39,28 @@
     return TWO_CARDS_MATCHING_GAME;
 }
 
-- (UIImage*)cardBackImage {
-    return [UIImage imageNamed:@"cardback.png"];
+- (NSInteger)startingCardCount
+{
+    return 20;
+}
+
+- (void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card animated:(BOOL)animated
+{
+    if ([cell isKindOfClass:[PlayingCardCollectionViewCell class]]) {
+        PlayingCardView *playingCardView = ((PlayingCardCollectionViewCell*)cell).playingCardView;
+        if ([card isKindOfClass:[PlayingCard class]]) {
+            PlayingCard *playingCard = (PlayingCard*) card;
+            playingCardView.rank = playingCard.rank;
+            playingCardView.suit = playingCard.suit;
+            if (playingCardView.faceUp != playingCard.isFaceUp) {
+                if (animated) {
+                    [playingCardView flipCardAnimated];
+                }
+                playingCardView.faceUp = playingCard.isFaceUp;
+            }
+            playingCardView.alpha = playingCard.isUnplayable ? 0.3 : 1.0;
+        }
+    }
 }
 
 @end

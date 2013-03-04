@@ -12,7 +12,7 @@
 @interface CardGameViewController : UIViewController
 
 // Override to return specific instance of Deck subclass
-// Default: instance of Deck
+// Default: nil
 - (Deck*)createNewDeck;
 
 // Override to set gamemode
@@ -31,7 +31,11 @@
 // Default: contents of a card
 - (NSAttributedString*) labelOfCard:(Card*) card;
 
-// Override to return card's back image
-// Default: retuns nil
-- (UIImage*)cardBackImage;
+//
+//
+@property (nonatomic) NSInteger startingCardCount;
+
+// Override to interpret card for a viewCell
+- (void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card animated:(BOOL)animated;
+
 @end
