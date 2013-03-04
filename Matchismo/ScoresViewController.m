@@ -20,7 +20,8 @@
 {
     _playingCardView = playingCardView;
     self.playingCardView.suit = @"♥";
-    self.playingCardView.rank = 13;
+    self.playingCardView.rank = 3;
+    self.playingCardView.faceUp = YES;
 }
 
 @end
