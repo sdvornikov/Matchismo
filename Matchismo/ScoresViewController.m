@@ -10,21 +10,10 @@
 #import "PlayingCardView.h"
 
 @interface ScoresViewController ()
-@property (weak, nonatomic) IBOutlet PlayingCardView *playingCardView;
 
 @end
 
 @implementation ScoresViewController
 
-- (void)setPlayingCardView:(PlayingCardView *)playingCardView
-{
-    _playingCardView = playingCardView;
-    self.playingCardView.suit = @"♠";
-    self.playingCardView.rank = 12;
-    self.playingCardView.faceUp = YES;
-}
-- (IBAction)tap:(UITapGestureRecognizer *)sender {
-    [self.playingCardView flipCardAnimated];
-}
 
 @end

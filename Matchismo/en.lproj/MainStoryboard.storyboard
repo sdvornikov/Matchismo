@@ -56,7 +56,7 @@
                                 </connections>
                             </slider>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Plr-W1-Cr9">
-                                <rect key="frame" x="20" y="20" width="280" height="304"/>
+                                <rect key="frame" x="20" y="20" width="289" height="304"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
@@ -594,30 +594,11 @@
                     <view key="view" contentMode="scaleToFill" id="fy9-OI-Vm6">
                         <rect key="frame" x="0.0" y="20" width="320" height="411"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view opaque="NO" contentMode="scaleToFill" id="nZ8-MP-ZHd" customClass="PlayingCardView">
-                                <rect key="frame" x="77" y="86" width="166" height="239"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="JN6-Aw-nZv" appends="YES" id="PGJ-4h-tnG"/>
-                                </connections>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.22393560770000001" green="0.50764266300000005" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Scores" image="scoresIcon.png" id="nDn-d9-66Z"/>
-                    <connections>
-                        <outlet property="playingCardView" destination="nZ8-MP-ZHd" id="9kt-rG-G47"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lJK-EC-LVz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="JN6-Aw-nZv">
-                    <connections>
-                        <action selector="tap:" destination="FpQ-Yp-uU1" id="18r-3R-3u5"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-1683" y="915"/>
         </scene>
@@ -679,10 +660,6 @@
         </class>
         <class className="ScoresViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ScoresViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="tap:" candidateClass="UITapGestureRecognizer"/>
-                <relationship kind="outlet" name="playingCardView" candidateClass="PlayingCardView"/>
-            </relationships>
         </class>
         <class className="SetGameViewController" superclassName="CardGameViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SetGameViewController.h"/>
