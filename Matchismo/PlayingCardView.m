@@ -43,10 +43,13 @@
     return @[@"?",@"A",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"J",@"Q",@"K"][self.rank];
 }
 
+#define CARD_ROUNDED_CORNER_RADIUS 5.0
+#define FACE_IMAGE_HOROZONTAL_SCALE_FACTOR 0.19
+#define FACE_IMAGE_VERTICAL_SCALE_FACTOR 0.13
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:12.0];
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CARD_ROUNDED_CORNER_RADIUS];
     [roundedRect addClip];
     [[UIColor whiteColor] setFill];
     
@@ -58,7 +61,8 @@
     if (self.faceUp) {
         UIImage *faceImage = [UIImage imageNamed:[NSString stringWithFormat:@"%@%@.png",[self rankAsString],self.suit]];
         if (faceImage) {
-            CGRect imageRect = CGRectInset(self.bounds, self.bounds.size.width * 0.19, self.bounds.size.height * 0.13);
+            CGRect imageRect = CGRectInset(self.bounds, self.bounds.size.width * FACE_IMAGE_HOROZONTAL_SCALE_FACTOR,
+                                           self.bounds.size.height * FACE_IMAGE_VERTICAL_SCALE_FACTOR);
             [faceImage drawInRect:imageRect];
         } else {
             [self drawPips];
@@ -72,7 +76,7 @@
 
 #pragma mark - Pips
 
-#define PIP_FONT_SCALE_FACTOR 0.20
+#define PIP_FONT_SCALE_FACTOR 0.18
 #define PIP_HOFFSET_PERCENTAGE 0.165
 #define PIP_VOFFSET1_PERCENTAGE 0.090
 #define PIP_VOFFSET2_PERCENTAGE 0.175
@@ -155,15 +159,17 @@
     CGContextRestoreGState(UIGraphicsGetCurrentContext());
 }
 
+#define CORNER_FONT_SCALE_FACTOR 0.13
+#define CORNER_LABEL_XY_OFFSET 0
 - (void)drawCorners
 {
     NSMutableParagraphStyle *paragraphStype = [[NSMutableParagraphStyle alloc] init];
     paragraphStype.alignment = NSTextAlignmentCenter;
-    UIFont *cornerFont = [UIFont systemFontOfSize:self.bounds.size.width * 0.17];
+    UIFont *cornerFont = [UIFont systemFontOfSize:self.bounds.size.width * CORNER_FONT_SCALE_FACTOR];
     
     NSAttributedString *cornerText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n%@",[self rankAsString],self.suit] attributes:@{NSParagraphStyleAttributeName : paragraphStype, NSFontAttributeName : cornerFont}];
     CGRect textBounds;
-    textBounds.origin = CGPointMake(2.0, 2.0);
+    textBounds.origin = CGPointMake(CORNER_LABEL_XY_OFFSET, CORNER_LABEL_XY_OFFSET);
     textBounds.size = [cornerText size];
     [cornerText drawInRect:textBounds];
     [self pushContextAndRotateUpsideDown];
