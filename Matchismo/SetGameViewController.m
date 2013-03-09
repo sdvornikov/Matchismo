@@ -8,6 +8,7 @@
 
 #import "SetGameViewController.h"
 #import "SetDeck.h"
+#import "SetCollectionViewCell.h"
 
 @interface SetGameViewController ()
 
@@ -15,19 +16,9 @@
 
 @implementation SetGameViewController
 
-- (void)updateCardButton:(UIButton*)cardButton forFaceUpStatus:(BOOL) isFaceUp {
-    if (isFaceUp) {
-        cardButton.backgroundColor = [UIColor lightGrayColor];
-    } else {
-        cardButton.backgroundColor = nil;
-    }
-    
-    cardButton.selected = isFaceUp;
-}
-
-- (void)updateCardButton:(UIButton*)cardButton forUnplayableStatus:(BOOL) isUnplayable {
-    cardButton.enabled = !isUnplayable;
-    cardButton.hidden = isUnplayable;
+- (NSInteger)startingCardCount
+{
+    return 12;
 }
 
 - (Deck*)createNewDeck {
@@ -36,6 +27,22 @@
 
 - (int)gameMode {
     return THREE_CARDS_MATCHING_GAME;
+}
+
+- (void)updateCell:(UICollectionViewCell*)cell usingCard:(Card*)card animated:(BOOL)animated
+{
+    if ([cell isKindOfClass:[SetCollectionViewCell class]]) {
+        SetCardView *setCardView = ((SetCollectionViewCell*)cell).setCardView;
+        if ([card isKindOfClass:[SetCard class]]) {
+            SetCard *setCard = (SetCard*) card;
+            setCardView.number = setCard.number+1;
+            setCardView.symbol = setCard.symbol;
+            setCardView.color = setCard.color;
+            setCardView.shading = setCard.shading;
+            setCardView.selected = setCard.isFaceUp;
+        }
+    }
+
 }
 
 - (NSAttributedString*) labelOfCard:(Card*) card {

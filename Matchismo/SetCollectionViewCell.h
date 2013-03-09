@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SetCardView.h"
 
 @interface SetCollectionViewCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet SetCardView *setCardView;
 
 @end

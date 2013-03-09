@@ -13,7 +13,6 @@
 @property (nonatomic) int flipCount;
 @property (strong,nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
 @property (strong,nonatomic) NSMutableArray *gameHistory; // of strings
 @property (weak, nonatomic) IBOutlet UISlider *gameHistorySlider;
@@ -30,7 +29,8 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PlayingCard" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Card"
+                                                                           forIndexPath:indexPath];
     Card *card = [self.game cardAtIndex:indexPath.item];
     [self updateCell:cell usingCard:card animated:NO];
     return cell;
@@ -46,15 +46,6 @@
         [self updateCell:cell usingCard:card animated:YES];
     }
 
-}
-
-- (void)updateCardButton:(UIButton*)cardButton forFaceUpStatus:(BOOL) isFaceUp {
-    cardButton.selected = isFaceUp;
-}
-
-- (void)updateCardButton:(UIButton*)cardButton forUnplayableStatus:(BOOL) isUnplayable {
-    cardButton.enabled = !isUnplayable;
-    cardButton.alpha = (isUnplayable ? 0.3 : 1.0);
 }
 
 - (NSAttributedString*) labelOfCard:(Card*) card {
@@ -141,23 +132,6 @@
 - (void)setFlipCount:(int)flipCount {
     _flipCount = flipCount;
     self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-}
-
-- (void)setCardButtons:(NSArray *)cardButtons {
-    _cardButtons = cardButtons;
-/*    UIImage *cardBackImage = [self cardBackImage];
-    if (cardBackImage) {
-        UIImage *blankImage = [[UIImage alloc] init];
-        for (UIButton *button in cardButtons) {
-            [button setImage:cardBackImage forState:UIControlStateNormal];
-            [button setImage:blankImage forState:UIControlStateSelected];
-            [button setImage:blankImage forState:UIControlStateDisabled|UIControlStateSelected];
-            [button setImage:blankImage forState:UIControlStateHighlighted|UIControlStateSelected];
-            button.imageEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5);
-        }
-    }
-    [self updateUI];
- */
 }
 
 - (NSMutableArray *)gameHistory {
