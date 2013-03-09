@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Sergey. All rights reserved.
 //
 
-#import "CardView.h"
+#import <UIKit/UIKit.h>
 
-@interface PlayingCardView : CardView
+@interface PlayingCardView : UIView
 
 @property (nonatomic) NSUInteger rank;
 @property (nonatomic,strong) NSString *suit;
