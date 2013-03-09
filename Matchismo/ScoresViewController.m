@@ -7,9 +7,11 @@
 //
 
 #import "ScoresViewController.h"
-#import "PlayingCardView.h"
+#import "SetCardView.h"
+
 
 @interface ScoresViewController ()
+@property (weak, nonatomic) IBOutlet SetCardView *setCardView;
 
 @end
 
