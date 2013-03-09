@@ -10,32 +10,18 @@
 
 @implementation SetCardView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (void)drawRect:(CGRect)rect
 {
-    [self drawSymbol:SYMBOL_DIAMOND atPoint:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2)
-                   withColor:[self symbolColor]
-                     shading:SHADING_OPEN
-                        size:40];
+    [self drawSymbolAtPoint:CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2)
+                size:40];
 }
 
-- (void)drawSymbol:(NSInteger)symbol
-           atPoint:(CGPoint)origin
-                 withColor:(UIColor*)color
-                   shading:(NSInteger) shading
-                      size:(CGFloat) size
+- (void)drawSymbolAtPoint:(CGPoint)origin
+                     size:(CGFloat)size
 {
     UIBezierPath *shape = [self makeSymbolPathAtPoint:origin size:size];
-    [color setStroke];
-    [color setFill];
+    [[self symbolColor] setStroke];
+    [[self symbolColor] setFill];
     [shape stroke];
     [self shadeShape:shape];
 
@@ -85,12 +71,27 @@
         [shape addLineToPoint:CGPointMake(origin.x, origin.y+size/2/SYMBOL_SQUEEZE_FACTOR)];
         [shape addLineToPoint:CGPointMake(origin.x-size/2, origin.y)];
         [shape closePath];
-    }
-    if (self.symbol == SYMBOL_OVAL) {
+    } else if (self.symbol == SYMBOL_OVAL) {
         shape = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(origin.x-size/2,
                                                                   origin.y-size/2/SYMBOL_SQUEEZE_FACTOR,
                                                                   size,
                                                                   size/SYMBOL_SQUEEZE_FACTOR)];
+    } else if (self.symbol == SYMBOL_SQUIGGLE) {
+        shape = [[UIBezierPath alloc] init];
+        origin = CGPointMake(origin.x, origin.y+size/10);
+        [shape moveToPoint:CGPointMake(origin.x-size/2, origin.y)];
+        [shape addCurveToPoint:CGPointMake(origin.x+size/2, origin.y)
+                 controlPoint1:CGPointMake(origin.x-size/3, origin.y-25)
+                 controlPoint2:CGPointMake(origin.x+size/3, origin.y+10)];
+        [shape addQuadCurveToPoint:CGPointMake(origin.x+size/2, origin.y+size/5)
+                      controlPoint:CGPointMake(origin.x+size/1.7, origin.y-size/11)];
+        [shape addCurveToPoint:CGPointMake(origin.x-size/2, origin.y+size/5)
+                 controlPoint1:CGPointMake(origin.x+size/3, origin.y+25)
+                 controlPoint2:CGPointMake(origin.x-size/3, origin.y-10)];
+        [shape addQuadCurveToPoint:CGPointMake(origin.x-size/2, origin.y)
+                      controlPoint:CGPointMake(origin.x-size/1.9, origin.y+size/6)];
+        [shape closePath];
+        
     }
     return shape;
 }

@@ -19,8 +19,8 @@
 
 -(void)viewDidLoad
 {
-    self.setCardView.symbol = SYMBOL_DIAMOND;
-    self.setCardView.shading = SHADING_SOLID;
+    self.setCardView.symbol = SYMBOL_SQUIGGLE;
+    self.setCardView.shading = SHADING_OPEN;
     self.setCardView.color = COLOR_GREEN;
     self.setCardView.number = NUMBER_2;
 }
