@@ -17,5 +17,12 @@
 
 @implementation ScoresViewController
 
+-(void)viewDidLoad
+{
+    self.setCardView.symbol = SYMBOL_DIAMOND;
+    self.setCardView.shading = SHADING_SOLID;
+    self.setCardView.color = COLOR_GREEN;
+    self.setCardView.number = NUMBER_2;
+}
 
 @end
