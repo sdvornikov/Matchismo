@@ -10,9 +10,6 @@
 
 @interface SetCardView : UIView
 
-#define NUMBER_1 0
-#define NUMBER_2 1
-#define NUMBER_3 2
 @property (nonatomic) NSUInteger number;
 #define SYMBOL_DIAMOND 0
 #define SYMBOL_SQUIGGLE 1
