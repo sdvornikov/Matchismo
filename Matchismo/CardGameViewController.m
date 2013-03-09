@@ -9,8 +9,7 @@
 #import "CardGameViewController.h"
 
 @interface CardGameViewController () <UICollectionViewDataSource>
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-@property (nonatomic) int flipCount;
+
 @property (strong,nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastFlipOutcomeLabel;
@@ -129,11 +128,6 @@
     return _game;
 }
 
-- (void)setFlipCount:(int)flipCount {
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
-}
-
 - (NSMutableArray *)gameHistory {
     if (!_gameHistory) {
         _gameHistory = [[NSMutableArray alloc] init];
@@ -145,7 +139,6 @@
 
 - (IBAction)dialNewCards:(UIButton *)sender {
     self.game = nil;
-    self.flipCount = 0;
     self.lastFlipOutcomeLabel.text = @"";
     self.gameHistory = nil;
     self.gameHistorySlider.enabled = NO;
@@ -161,7 +154,6 @@
         [self.game flipCardAtIndex:path.item];
         [self updateScoreLable];
         [self updateUI];
-        self.flipCount++;
         [self displayLastFlipInfoForCards:self.game.lastFlippedCards forOutcome:self.game.lastFlipOutcome points:self.game.lastScoreChange];
     }
     
