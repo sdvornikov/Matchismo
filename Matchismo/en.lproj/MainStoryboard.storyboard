@@ -182,10 +182,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="39" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" id="xqL-Eb-FCZ" customClass="SetCardView">
+                                                <view opaque="NO" contentMode="scaleToFill" id="xqL-Eb-FCZ" customClass="SetCardView">
                                                     <rect key="frame" x="0.0" y="0.0" width="39" height="60"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

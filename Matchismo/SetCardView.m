@@ -42,8 +42,22 @@
     [self setNeedsDisplay];
 }
 
+#define CARD_ROUNDED_CORNER_RADIUS 5.0
 - (void)drawRect:(CGRect)rect
 {
+    UIBezierPath *roundedRect = [UIBezierPath bezierPathWithRoundedRect:self.bounds cornerRadius:CARD_ROUNDED_CORNER_RADIUS];
+    [roundedRect addClip];
+    if (self.selected) {
+        [[UIColor lightGrayColor] setFill];
+    } else {
+        [[UIColor whiteColor] setFill];
+    }
+    
+    UIRectFill(self.bounds);
+    
+    [[UIColor blackColor] setStroke];
+    [roundedRect stroke];
+    
     CGFloat shapeSize = self.bounds.size.height/3;
     for (int i = 1 ; i < self.number+1 ; i++) {
         CGPoint point = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/(self.number+1)*i);
