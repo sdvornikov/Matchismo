@@ -7,6 +7,7 @@ https://itunes.apple.com/us/course/coding-together-developing/id593208016
 This is a public repository for the course assignments.
 Matchismo is a simple card matching game.
 
+- some test text
 
 
 ----
